@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React from "react";
 
 function MiniProfile() {
-  const { data: session } = useSession();
+  const { data: session }: { data: any } = useSession();
   const router = useRouter();
 
   // console.log(session);
@@ -21,7 +21,7 @@ function MiniProfile() {
         <h3 className="text-sm text-gray-400">Welcome to Instagram</h3>
       </div>
 
-      <button onClick={() => router.push("/auth/signin")} className="text-blue-400 text-sm font-semibold">Sign Out</button>
+      <button onClick={() =>signOut()} className="text-blue-400 text-sm font-semibold">Sign Out</button>
     </div>
   );
 }

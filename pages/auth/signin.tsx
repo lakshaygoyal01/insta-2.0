@@ -1,14 +1,8 @@
 import React from "react";
-import type {
-  GetServerSidePropsContext,
-  InferGetServerSidePropsType,
-} from "next";
 import { getProviders, signIn as SignIntoProvider } from "next-auth/react";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../api/auth/[...nextauth]";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import Header from "../../components/Header";
+
 
 //Browser...
 function signIn({ providers }) {
@@ -19,7 +13,6 @@ function signIn({ providers }) {
           <img className="w-80" src="https://links.papareact.com/ocw" alt="" />
 
           <Carousel
-            autoplay={true}
             infiniteLoop={true}
             showStatus={false}
             showIndicators={false}

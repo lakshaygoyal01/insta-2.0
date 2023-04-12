@@ -6,7 +6,7 @@ import Story from "./Story";
 
 function Stories() {
   const [suggestions, setSuggestions] = useState([]);
-  const { data: session } = useSession();
+  const { data: session}: { data: any }  = useSession();
 
   useEffect(() => {
     const suggestions = [...Array(20)].map((_, i) => ({

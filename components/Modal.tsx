@@ -15,7 +15,7 @@ import { useSession } from "next-auth/react";
 import { ref, getDownloadURL, uploadString } from "firebase/storage";
 
 function Modal() {
-  const { data: session } = useSession();
+  const { data: session }: { data: any } = useSession();
   const [open, setOpen] = useRecoilState(modalState);
   const filePickerRef = useRef(null);
   const captionRef = useRef(null);
