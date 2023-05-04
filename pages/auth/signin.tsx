@@ -48,7 +48,7 @@ function signIn({ providers }) {
         <div className="flex flex-col items-center justify-center min-h-screen py-2 px-14 text-center">
           {/* <img className="w-80" src="https://about.fb.com/wp-content/uploads/2022/12/03_Candid-1.jpg?resize=890%2C775" alt="" /> */}
           <div>
-            {Object.values(providers).map((provider) => (
+            {providers&&Object.values(providers).map((provider: any) => (
               <div key={provider.name}>
                 <button
                   className="flex w-50 h-12 p-3 bg-blue-500 rounded-lg items-center space-x-2 text-white"

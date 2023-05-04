@@ -91,7 +91,7 @@ function Header() {
               />
             </>
           ) : (
-            <button onClick={() =>signOut()}>Sign In</button>
+            <button onClick={(e: any) =>signIn(e)}>Sign In</button>
           )}
         </div>
       </div>
