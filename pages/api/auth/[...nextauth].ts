@@ -5,8 +5,8 @@ export const authOptions = {
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
-      clientId: '678537079664-342s4irhi4htuc0gg7sqjbeqjc7i4k22.apps.googleusercontent.com',
-      clientSecret: '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',
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     // ...add more providers here
   ],
