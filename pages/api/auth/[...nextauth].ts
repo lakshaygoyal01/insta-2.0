@@ -1,5 +1,11 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import crypto from "crypto";
+
+const generateSecret = () => {
+  const buffer = crypto.randomBytes(64);
+  return buffer.toString("hex");
+};
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -25,5 +31,8 @@ export const authOptions = {
       return session;
     },
   },
+  
+
+  secret: generateSecret(), // Generate and set the secret here
 };
 export default NextAuth(authOptions);
