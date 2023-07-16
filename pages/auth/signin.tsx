@@ -8,7 +8,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 function signIn({ providers }) {
   return (
     <>
-      <div className="flex flex-row items-center justify-center py-2 px-14 text-center">
+      <div className="flex flex-col items-center min-h-screen justify-center py-2 px-14 text-center">
         <div className="flex flex-col items-center justify-center w-100 h-150 py-2 px-14 text-center">
           <img className="w-80" src="https://links.papareact.com/ocw" alt="" />
 
@@ -45,13 +45,13 @@ function signIn({ providers }) {
             This is not a Real app, it is built for educational purposes only
           </p>
         </div>
-        <div className="flex flex-col items-center justify-center min-h-screen py-2 px-14 text-center">
+        <div className="flex flex-col items-center justify-center py-2 px-14 text-center">
           {/* <img className="w-80" src="https://about.fb.com/wp-content/uploads/2022/12/03_Candid-1.jpg?resize=890%2C775" alt="" /> */}
           <div>
             {providers&&Object.values(providers).map((provider: any) => (
               <div key={provider.name}>
                 <button
-                  className="flex w-50 h-12 p-3 bg-blue-500 rounded-lg items-center space-x-2 text-white"
+                  className="flex w-50 h-12 p-3 bg-blue-500 rounded-lg items-center  space-x-2 text-white"
                   onClick={() =>
                     SignIntoProvider(provider.id, { callbackUrl: "/" })
                   }
