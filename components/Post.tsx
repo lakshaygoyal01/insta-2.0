@@ -69,6 +69,11 @@ function Post({ id, username, userImg, img, caption }) {
     }
   };
 
+  const deletePost = async () => {
+    await deleteDoc(doc(db, "posts", id));
+  }
+
+
   const sendComment = async (e) => {
     e.preventDefault();
 
@@ -93,6 +98,11 @@ function Post({ id, username, userImg, img, caption }) {
           alt=''
         />
         <p className='flex-1 font-bold'>{username}</p>
+        {session?.user?.username === username && (
+          <button onClick={deletePost} className='text-red-400'>
+            Delete
+          </button>
+        )}
         <DotsHorizontalIcon className='h-5' />
       </div>
 
@@ -127,7 +137,9 @@ function Post({ id, username, userImg, img, caption }) {
       {comments.length > 0 && (
         <div className='ml-10 h-20 overflow-y-scroll scrollbar-thumb-black scrollbar-thin'>
           {comments.map((comment) => (
+            
             <div key={comment.id} className='flex items-center space-x-2 mb-3'>
+              
               <img
                 className='h-7 rounded-full'
                 src={comment.data().userImage}
