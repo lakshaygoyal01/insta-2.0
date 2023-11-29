@@ -1,6 +1,7 @@
 import {
   BookmarkIcon,
   ChatIcon,
+  TrashIcon,
   DotsHorizontalIcon,
   EmojiHappyIcon,
   HeartIcon,
@@ -72,6 +73,13 @@ function Post({ id, username, userImg, img, caption }) {
   const deletePost = async () => {
     await deleteDoc(doc(db, "posts", id));
   }
+
+  const deleteComment = async (e) => {
+    e.preventDefault();
+    console.log("delete comment", e.target.value);
+    await deleteDoc(doc(db, "posts", id, "comments", e.target.value));  
+  }
+
 
 
   const sendComment = async (e) => {
@@ -149,9 +157,14 @@ function Post({ id, username, userImg, img, caption }) {
                 <span className='font-bold'>{comment.data().username}</span>{" "}
                 {comment.data().comment}
               </p>
-              <Moment fromNow className='text-xs pr-5'>
+              <Moment fromNow className='text-xs pr-2'>
                 {comment.data().timestamp?.toDate()}
               </Moment>
+              {session?.user?.username === comment.data().username && (
+                <button onClick={deleteComment} value={comment.id} className='text-red-400 pr-1'>
+                  <TrashIcon className='h-5' />
+                </button>
+              )}
             </div>
           ))}
         </div>
