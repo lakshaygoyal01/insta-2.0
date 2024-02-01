@@ -30,6 +30,7 @@ function Post({ id, username, userImg, img, caption }) {
   const [comments, setComments] = useState([]);
   const [likes, setLikes] = useState([]);
   const [hasLiked, setHasLiked] = useState(false);
+  const [popUp, setPopUp] = useState(false);
 
   console.log("session", session);
   useEffect(
@@ -72,15 +73,12 @@ function Post({ id, username, userImg, img, caption }) {
 
   const deletePost = async () => {
     await deleteDoc(doc(db, "posts", id));
-  }
+  };
 
-  const deleteComment = async (e) => {
-    e.preventDefault();
-    console.log("delete comment", e.target.value);
-    await deleteDoc(doc(db, "posts", id, "comments", e.target.value));  
-  }
-
-
+  const deleteComment = async (commentId) => {
+    await deleteDoc(doc(db, "posts", id, "comments", commentId));
+    console.log("Comment deleted successfully");
+  };
 
   const sendComment = async (e) => {
     e.preventDefault();
@@ -96,6 +94,10 @@ function Post({ id, username, userImg, img, caption }) {
     });
   };
 
+  const handlePopUp = () => {
+    setPopUp(!popUp);
+  };
+
   return (
     <div className='bg-white my-7 border rounded-sm'>
       {/* Header */}
@@ -106,12 +108,23 @@ function Post({ id, username, userImg, img, caption }) {
           alt=''
         />
         <p className='flex-1 font-bold'>{username}</p>
-        {session?.user?.username === username && (
-          <button onClick={deletePost} className='text-red-400'>
-            Delete
-          </button>
-        )}
-        <DotsHorizontalIcon className='h-5' />
+
+        <div
+          onClick={handlePopUp}
+          style={{ cursor: "pointer", display: "flex", position: "relative" }}
+        >
+          <DotsHorizontalIcon className='h-5' />{" "}
+          {session && popUp && (
+            <div className='absolute top-4 right-0 bg-white w-20 shadow-lg py-2 rounded-xl transition duration-100 ease-in'>
+              <button
+                onClick={deletePost}
+                className=' flex  text-red-400 justify-center text-sm hover:bg-gray-100 w-full'
+              >
+                <p>Delete</p> <TrashIcon className='h-5 ml-2 ' />{" "}
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* img */}
@@ -145,9 +158,7 @@ function Post({ id, username, userImg, img, caption }) {
       {comments.length > 0 && (
         <div className='ml-10 h-20 overflow-y-scroll scrollbar-thumb-black scrollbar-thin'>
           {comments.map((comment) => (
-            
             <div key={comment.id} className='flex items-center space-x-2 mb-3'>
-              
               <img
                 className='h-7 rounded-full'
                 src={comment.data().userImage}
@@ -161,7 +172,11 @@ function Post({ id, username, userImg, img, caption }) {
                 {comment.data().timestamp?.toDate()}
               </Moment>
               {session?.user?.username === comment.data().username && (
-                <button onClick={deleteComment} value={comment.id} className='text-red-400 pr-1'>
+                <button
+                  onClick={() => deleteComment(comment.id)}
+                  value={comment.id}
+                  className='text-red-400 pr-1'
+                >
                   <TrashIcon className='h-5' />
                 </button>
               )}
