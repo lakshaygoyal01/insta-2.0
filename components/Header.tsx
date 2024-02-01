@@ -63,10 +63,8 @@ function Header() {
         </div>
 
         {/* Right  */}
-        <div className="flex items-center justify-end space-x-4">
+        <div className="flex items-center justify-end md:space-x-4">
           <HomeIcon onClick={() => router.push("/")} className="navBtn" />
-          <MenuIcon className="h-12 md:hidden cursor-pointer" />
-
           {session ? (
             <>
               <div className="relative">
@@ -78,7 +76,7 @@ function Header() {
 
               <PlusCircleIcon
                 onClick={() => setOpen(true)}
-                className="navBtn"
+                className="h-12 md:h-6 mr-1 md:mr-0 cursor-pointer hover:scale-125 transition-all duration-150 ease-out"
               />
               <UserGroupIcon className="navBtn" />
               <HeartIcon className="navBtn" />
