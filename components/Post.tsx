@@ -114,13 +114,13 @@ function Post({ id, username, userImg, img, caption }) {
           style={{ cursor: "pointer", display: "flex", position: "relative" }}
         >
           <DotsHorizontalIcon className='h-5' />{" "}
-          {session && popUp && (
-            <div className='absolute top-4 right-0 bg-white w-20 shadow-lg py-2 rounded-xl transition duration-100 ease-in'>
+          {popUp && session?.user?.username === username && (
+            <div className={`absolute top-4 right-0 bg-white w-20 shadow-lg py-2 rounded-xl transition duration-100 ease-in `}>
               <button
                 onClick={deletePost}
                 className=' flex  text-red-400 justify-center text-sm hover:bg-gray-100 w-full'
               >
-                <p>Delete</p> <TrashIcon className='h-5 ml-2 ' />{" "}
+                <p>Delete</p> <TrashIcon className='h-5 ml-2 ' />
               </button>
             </div>
           )}
